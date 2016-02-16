@@ -1,0 +1,12 @@
+---
+tasks:
+  -
+    name: "classify_pixels"
+    doc: "Classify pixels using ilastik"
+    type: "python"
+    params:
+      ilastik_project: "example_pixelclass.ilp"
+    call: |
+      from iBRAIN.apps.ilastikapp import IlastikApp
+      IlastikApp.run('{project_path}/{ilastik_project}', ['{images_path}/{file}'])
+    foreach_file: '{images_path}/*C01.tif'

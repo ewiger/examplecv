@@ -1,0 +1,39 @@
+---
+tasks:
+  - name: split_images
+    doc: "Split images into independent lists"
+    type: "python"
+    params:
+      group_filename: "image_groups.json"
+    call: |
+        import logging
+        logging.basicConfig(level=logging.INFO)
+        from parcp import ParallelCellProfiler
+        runner = ParallelCellProfiler('{project_path}')
+        runner.load_image_setting('{group_filename}')
+        runner.split_images()
+
+  - name: run_batches
+    doc: "Run each batch (set) of images in parallel."
+    type: "python"
+    params:
+      pipeline_filename: "basic.cppipe"
+    call: |
+        import logging
+        logging.basicConfig(level=logging.INFO)
+        from parcp import ParallelCellProfiler
+        runner = ParallelCellProfiler('{project_path}')
+        image_group_filename = '{project_path}/image_groups/{file}'
+        group_index = int('{file}'.replace('image_set_', '').replace('.csv', ''))
+        runner.run_batch('{project_path}/{pipeline_filename}', group_index, image_group_filename)
+    foreach_file: "{project_path}/image_groups/image_set_*.csv"
+
+  - name: merge_results
+    type: "python"
+    doc: "Merge all CSV results. Remap image and object indexes."
+    call: |
+        import logging
+        logging.basicConfig(level=logging.INFO)
+        from parcp import ParallelCellProfiler
+        runner = ParallelCellProfiler('{project_path}')
+        runner.merge_results()

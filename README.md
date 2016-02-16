@@ -1,2 +1,5 @@
 # examplecv
-A showcase project on how to run simple ilastik and Cellprofiler pipeline in parallel
+An example dataset with workflow for brainy using:
+ - ilastik
+ - CellProfiler
+

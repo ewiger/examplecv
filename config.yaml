@@ -1,0 +1,4 @@
+{brainy: {version: 0.6.0}, params: {analysis_path: '{project_path}/POSTANALYSIS',
+    data_path: '{project_path}/BATCH', illumcor_path: '{project_path}/BATCH', images_path: '{project_path}/images',
+    reports_path: 'job_reports_of_{name}', task_architecture: x86_64, task_resubmission_time: 2h,
+    task_submission_cores: 1, task_submission_memory: 2GB, task_submission_time: 1h}}
